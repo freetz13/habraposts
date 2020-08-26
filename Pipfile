@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 bs4 = "*"
 requests = "*"
+django = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.8"

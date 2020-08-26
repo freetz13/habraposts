@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import json
 import sys
 from pathlib import Path
 
+import yaml
 import requests
 from habraparser import parse, REASONS
 
@@ -12,7 +12,7 @@ STORAGE_DIR = Path(__file__).absolute().parent / 'posts'
 
 def save(data, fname):
     with open(fname, "w", encoding="utf-8", newline="\n") as fobj:
-        json.dump(data, fobj, ensure_ascii=False, indent=4)
+        fobj.write(yaml.dump(data, allow_unicode=True))
 
 
 def main():
@@ -50,7 +50,7 @@ def main():
     print(f"comments_count:\t{info['comments_count']}")
     print()
 
-    filename = STORAGE_DIR / f"{info['id']}.json"
+    filename = STORAGE_DIR / f"{info['id']}.yaml"
     answer = input(f"Post will be saved in '{filename}' file. OK? [y/N]: ")
     if answer.lower() != "y":
         return
