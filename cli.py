@@ -10,11 +10,6 @@ from habraparser import parse, REASONS
 STORAGE_DIR = Path(__file__).absolute().parent / 'posts'
 
 
-def load(fname):
-    with open(fname, "br") as fobj:
-        return json.load(fobj)
-
-
 def save(data, fname):
     with open(fname, "w", encoding="utf-8", newline="\n") as fobj:
         json.dump(data, fobj, ensure_ascii=False, indent=4)
