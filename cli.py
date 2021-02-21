@@ -17,6 +17,8 @@ def save(data, fname):
 
 def main():
     url = sys.argv[1] if sys.argv[1:] else input("Enter url: ")
+    if url.isdecimal():
+        url = f"https://habr.com/ru/post/{url}/"
     if not STORAGE_DIR.exists():
         STORAGE_DIR.mkdir()
 
