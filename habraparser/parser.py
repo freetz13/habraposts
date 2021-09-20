@@ -39,32 +39,32 @@ def parse(html: str):
     )
 
     title = _process(
-        soup.select_one("span.post__title-text"),
+        soup.select_one("h1.tm-article-snippet__title"),
         lambda element: element.get_text(),
         TagNotFound("Can't find title"),
     )
 
     published = _process(
-        soup.select_one("span.post__time"),
-        lambda element: element.get("data-time_published", ""),
+        soup.select_one("span.tm-article-snippet__datetime-published time"),
+        lambda element: element.get("datetime"),
         TagNotFound("Can't find published"),
     )
 
     tags = _process(
-        soup.select_one("meta[name=keywords]"),
-        lambda element: element.get("content", "").split(", "),
+        soup.select('.tm-separated-list__list')[0].select('a'),
+        lambda element: [i.text for i in element],
         TagNotFound("Can't find tags"),
     )
 
     words_count = _process(
-        soup.select_one("div.post__text"),
+        soup.select_one("div.tm-article-body"),
         lambda element: len(re.findall(r"\w+", element.get_text())),
         TagNotFound("Can't find words_count"),
     )
 
     comments_count = _process(
-        soup.select_one("#comments_count"),
-        lambda element: int(element.get_text()),
+        soup.select_one(".tm-article-comments-counter-link__value"),
+        lambda element: int(''.join(i for i in element.get_text() if i.isdigit())),
         TagNotFound("Can't find comments_count"),
     )
 
