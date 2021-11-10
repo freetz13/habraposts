@@ -64,7 +64,7 @@ def parse(html: str):
 
     comments_count = _process(
         soup.select_one(".tm-article-comments-counter-link__value"),
-        lambda element: int(''.join(i for i in element.get_text() if i.isdigit())),
+        lambda element: int(''.join(i for i in element.get_text() if i.isdigit()) or '0'),
         TagNotFound("Can't find comments_count"),
     )
 
