@@ -1,2 +1,2 @@
 *.pyc
-posts/
+*.sqlite3

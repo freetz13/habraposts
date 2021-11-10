@@ -4,12 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+ipython = "*"
 
 [packages]
 bs4 = "*"
 requests = "*"
 django = "*"
-pyyaml = "*"
-
-[requires]
-python_version = "3.8"
+django-rest-framework = "*"

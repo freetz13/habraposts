@@ -3,24 +3,17 @@
 import sys
 from pathlib import Path
 
-import yaml
 import requests
+
+from habrakeeper.wsgi import application
+from api.models import Article, AuthorTag
 from habraparser import parse, REASONS
-
-STORAGE_DIR = Path(__file__).absolute().parent / 'posts'
-
-
-def save(data, fname):
-    with open(fname, "w", encoding="utf-8", newline="\n") as fobj:
-        fobj.write(yaml.dump(data, allow_unicode=True))
 
 
 def main():
     url = sys.argv[1] if sys.argv[1:] else input("Enter url: ")
     if url.isdecimal():
         url = f"https://habr.com/ru/post/{url}/"
-    if not STORAGE_DIR.exists():
-        STORAGE_DIR.mkdir()
 
     print("Fetching...")
     try:
@@ -52,15 +45,29 @@ def main():
     print(f"comments_count:\t{info['comments_count']}")
     print()
 
-    filename = STORAGE_DIR / f"{info['id']}.yaml"
-    answer = input(f"Post will be saved in '{filename}' file. OK? [y/N]: ")
+    answer = input(f"Post will be saved in Django database file. OK? [y/N]: ")
     if answer.lower() != "y":
         return
 
+    created = None
     try:
-        save(info, filename)
-    finally:
-        print("Post added!")
+        post, created = Article.objects.get_or_create(id=info['id'])
+
+        post.url=info['url']
+        post.title=info['title']
+        post.published=info['published']
+        post.words_count=info['words_count']
+        post.comments_count=info['comments_count']
+        post.save()
+
+        for tag in info['tags']:
+            article_tag, _ = AuthorTag.objects.get_or_create(name=tag)
+            article_tag.save()
+            post.author_tags.add(article_tag)
+    except Exception as e:
+        raise e
+    else:
+        print("Post created!" if created else "Post updated")
 
 
 if __name__ == "__main__":
