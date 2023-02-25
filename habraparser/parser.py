@@ -45,7 +45,7 @@ def parse(html: str):
     )
 
     published = _process(
-        soup.select_one("span.tm-article-snippet__datetime-published time"),
+        soup.select_one("span.tm-article-datetime-published time"),
         lambda element: element.get("datetime"),
         TagNotFound("Can't find published"),
     )
