@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
+    'frontend.apps.FrontendConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -105,13 +106,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
 USE_TZ = True
 

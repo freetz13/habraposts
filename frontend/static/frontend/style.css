@@ -1,0 +1,68 @@
+.article {
+  display: grid;
+  grid-template-columns: 20% auto 10%;
+  background-color: lightcyan;
+  margin-bottom: 1rem;
+}
+
+.left,
+.middle,
+.right {
+  padding: 1rem;
+}
+
+.article_title {
+  font-weight: bold;
+  font-size: larger;
+  margin-bottom: 1rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.taglist,
+.left {
+  font-size: smaller;
+}
+
+.header {
+  grid-column-start: span 2;
+}
+
+.left {
+  background-color: lightblue;
+}
+
+.date {
+  margin-bottom: 1rem;
+}
+
+.words::before {
+  content: "С";
+  margin-right: .25rem;
+}
+
+.comments::before {
+  content: "К";
+  margin-right: .25rem;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.content {
+  max-width: 800px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  column-gap: 100px !important;
+}
+
+.right button {
+  flex: auto;
+}
