@@ -11,8 +11,11 @@
         </ul>
       </div>
       <div class="item content">
-        {% if articles %}
-          {% for article in articles %}
+        {% if page_obj %}
+
+        {% include "frontend/paginator.html" %}
+
+        {% for article in page_obj %}
             <div class="article">
 
               <div class="left">
@@ -51,6 +54,9 @@
 
             </div>
             {% endfor %}
+
+            {% include "frontend/paginator.html" %}
+
         {% else %}
           <p>Шеф, все пропало!</p>
         {% endif %}
