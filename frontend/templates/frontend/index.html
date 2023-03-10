@@ -11,11 +11,11 @@
         </ul>
       </div>
       <div class="item content">
-        {% if page_obj %}
+        {% if posts %}
 
         {% include "frontend/paginator.html" %}
 
-        {% for article in page_obj %}
+        {% for article in posts %}
             <div class="article">
 
               <div class="left">
