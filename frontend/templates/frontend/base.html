@@ -17,6 +17,23 @@
         <ul>
           <li><a href="{% url 'admin:index' %}" target="_blank">Админка</a></li>
         </ul>
+        <table>
+          <caption>Статистика</caption>
+          <tbody>
+            <tr>
+              <td>Статей</td>
+              <td class="number">{{ articles_count }}</td>
+            </tr>
+            <tr>
+              <td>Авторских тегов</td>
+              <td class="number">{{ author_tags_count }}</td>
+            </tr>
+            <tr>
+              <td>Пользовательских тегов</td>
+              <td class="number">{{ user_tags_count }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="item content">
         {% block body %}

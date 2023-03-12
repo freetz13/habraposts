@@ -77,3 +77,16 @@ a.btn, a.btn:hover {
   text-decoration: none;
   display: inline-block;
 }
+
+td {
+  padding-top: 1em;
+  padding-top: 1em;
+}
+
+td.number {
+  text-align: right;
+}
+
+table caption {
+  font-weight: bold;
+}
