@@ -1,64 +1,54 @@
 {% extends "frontend/base.html" %}
 
 {% block body %}
-<div class="container">
-      <div class="item header">
-        <img src="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg" alt="Habr.com logo" style="margin: 0 auto; display: block;">
+  {% if posts %}
+
+  {% include "frontend/paginator.html" %}
+
+  {% for article in posts %}
+    <div class="article">
+
+      <div class="left">
+        <div class="date">{{ article.published|date:"j E Y" }}</div>
+        <div class="words"><span class="value">{{ article.words_count }}</span></div>
+        <div class="comments"><span class="value">{{ article.comments_count }}</span></div>
       </div>
-      <div class="item panel">
-        <ul>
-          <li><a href="{% url 'admin:index' %}" target="_blank">Админка</a></li>
-        </ul>
-      </div>
-      <div class="item content">
-        {% if posts %}
 
-        {% include "frontend/paginator.html" %}
+      <div class="middle">
+        <div class="article_title">
+          <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+        </div>
 
-        {% for article in posts %}
-            <div class="article">
-
-              <div class="left">
-                <div class="date">{{ article.published|date:"j E Y" }}</div>
-                <div class="words"><span class="value">{{ article.words_count }}</span></div>
-                <div class="comments"><span class="value">{{ article.comments_count }}</span></div>
-              </div>
-
-              <div class="middle">
-                <div class="article_title">
-                  <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
-                </div>
-
-                {% if article.author_tags.all %}
-                <div class="taglist">
-                    Теги автора:
-                    {% for tag in article.author_tags.all %}
-                      <a href="#" class="tag">{{ tag.name }}</a>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-                
-                {% if article.user_tags.all %}
-                  <div class="taglist">
-                    Теги пользователя:
-                    {% for tag in article.user_tags.all %}
-                    <a href="#" class="tag">{{ tag.name }}</a>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-              </div>
-              <div class="right">
-                <button>X</button>
-                <button>R</button>
-              </div>
-
-            </div>
-            {% endfor %}
-
-            {% include "frontend/paginator.html" %}
-
-        {% else %}
-          <p>Шеф, все пропало!</p>
+        {% if article.author_tags.all %}
+        <div class="taglist">
+          Теги автора:
+          {% for tag in article.author_tags.all %}
+            <a href="#" class="tag">{{ tag.name }}</a>
+          {% endfor %}
+        </div>
         {% endif %}
-  </div>
+        
+        {% if article.user_tags.all %}
+          <div class="taglist">
+            Теги пользователя:
+            {% for tag in article.user_tags.all %}
+              <a href="#" class="tag">{{ tag.name }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="right">
+        <a href="#" class="btn">Обновить</a>
+        <a href="/{{article.id}}/delete/" class="btn">Удалить</a>
+      </div>
+
+    </div>
+  {% endfor %}
+
+  {% include "frontend/paginator.html" %}
+
+  {% else %}
+    <p>Шеф, все пропало!</p>
+  {% endif %}
 {% endblock body %}

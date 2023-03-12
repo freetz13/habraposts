@@ -9,7 +9,19 @@
     <link rel="stylesheet" href="{% static 'frontend/style.css' %}" />
   </head>
   <body>
-    {% block body %}
-    {% endblock body %}
+    <div class="container">
+      <div class="item header">
+        <img src="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg" alt="Habr.com logo" style="margin: 0 auto; display: block;">
+      </div>
+      <div class="item panel">
+        <ul>
+          <li><a href="{% url 'admin:index' %}" target="_blank">Админка</a></li>
+        </ul>
+      </div>
+      <div class="item content">
+        {% block body %}
+        {% endblock body %}
+      </div>
+    </div>
   </body>
 </html>

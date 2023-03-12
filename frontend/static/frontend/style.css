@@ -1,6 +1,6 @@
 .article {
   display: grid;
-  grid-template-columns: 20% auto 10%;
+  grid-template-columns: 20% auto 20%;
   background-color: lightcyan;
   margin-bottom: 1rem;
 }
@@ -18,7 +18,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 6fr;
 }
 
 .taglist,
@@ -52,18 +52,8 @@
   font-weight: bold;
 }
 
-.content {
-  max-width: 800px;
-}
-
 .right {
-  display: flex;
-  flex-direction: column;
-  column-gap: 100px !important;
-}
-
-.right button {
-  flex: auto;
+  background-color: aquamarine;
 }
 
 .pagination {
@@ -76,4 +66,14 @@
   padding: .5em 1em;
   text-decoration: none;
   border: 1px solid lightgray;
+}
+
+a.btn, a.btn:hover {
+  background-color: lightpink;
+  font-size: smaller;
+  color: initial;
+  padding: 1rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
 }

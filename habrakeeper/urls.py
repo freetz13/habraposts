@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from frontend.views import PostList
+from frontend.views import PostList, PostDelete
 
 urlpatterns = [
     path('', PostList.as_view(), name='index'),
+    path('<int:pk>/delete/', PostDelete.as_view(), name='delete'),
     path('admin/', admin.site.urls, name='admin'),
     path('api/', include('api.urls'), name='api'),
 ]
