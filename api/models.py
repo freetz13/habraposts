@@ -1,4 +1,5 @@
 from django.db import models
+from django.dispatch import receiver
 
 
 class BaseTag(models.Model):
@@ -9,7 +10,7 @@ class BaseTag(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['name']
+        ordering = ["name"]
 
 
 class UserTag(BaseTag):
@@ -34,4 +35,17 @@ class Article(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-published']
+        ordering = ["-published"]
+
+
+@receiver(models.signals.pre_delete, sender=Article)
+def avoid_tags_orphans(sender, instance, **kwargs):
+    for author_tag in instance.author_tags.all():
+        instance.author_tags.remove(author_tag)
+        if not author_tag.article_set.all().exists():
+            author_tag.delete()
+
+    for user_tag in instance.user_tags.all():
+        instance.user_tags.remove(user_tag)
+        if not user_tag.article_set.all().exists():
+            user_tag.delete()
