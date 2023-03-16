@@ -1,13 +1,11 @@
 <div class="pagination">
-  {% if page_obj.has_previous %}
-  <a href="?page=1">&LeftArrowBar;</a>
-  <a href="?page={{ page_obj.previous_page_number }}">&slarr;</a>
-  {% endif %}
-
-  {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
-
-  {% if page_obj.has_next %}
-  <a href="?page={{ page_obj.next_page_number }}">&srarr;</a>
-  <a href="?page={{ page_obj.paginator.num_pages }}">&RightArrowBar;</a>
-  {% endif %}
+  <form>
+    {% for page in page_obj.paginator.page_range %}
+      {% if page == page_obj.paginator.ELLIPSIS %}
+        ...
+      {% else %}
+        <button type="submit" name="page" value="{{ page }}">{{ page }}</button>
+      {% endif %}
+    {% endfor %}
+    </form>
 </div>

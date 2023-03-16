@@ -61,11 +61,9 @@
   margin-bottom: 1em;
 }
 
-.pagination a {
-  color: black;
-  padding: .5em 1em;
-  text-decoration: none;
-  border: 1px solid lightgray;
+.pagination button {
+  width: 3em;
+  height: 2em;
 }
 
 a.btn, a.btn:hover {
