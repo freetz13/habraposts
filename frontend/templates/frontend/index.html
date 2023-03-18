@@ -39,8 +39,13 @@
       </div>
 
       <div class="right">
-        <a href="#" class="btn">Обновить</a>
-        <a href="/{{article.id}}/delete/" class="btn">Удалить</a>
+        <form>
+          <button>Обновить</button>
+        </form>
+        <br>
+        <form action="{{ article.id }}/delete/">
+          <button type="submit">Удалить</button>
+        </form>
       </div>
 
     </div>
