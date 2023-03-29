@@ -39,7 +39,7 @@ def parse(html: str):
     )
 
     title = _process(
-        soup.select_one("h1.tm-article-snippet__title"),
+        soup.select_one("h1.tm-title"),
         lambda element: element.get_text(),
         TagNotFound("Can't find title"),
     )
